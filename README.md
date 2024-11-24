@@ -31,9 +31,9 @@ Take this opportunity to create or add to a simple resume portfolio to highlight
 > 
 > 
 >  - Files:
->   - mainscreen.html / Lines: 14, 19, 21-42  
->   - demo.css / Lines 1-11  
->   - README.md / Lines 27-43
+>    - mainscreen.html / Lines: 14, 19, 21-42  
+>    - demo.css / Lines 1-11  
+>    - README.md / Lines 27-43
 > 
 > 
 >  - Changes:  
@@ -43,3 +43,20 @@ Parts: Flour, Butter, Eggs, Milk, Vanilla Extract
 Products: Birthday Cakes, Cupcakes, Croissants, Cookies, Tarts
 > 
 > 
+
+
+
+### Task D:
+>  - Prompt:  
+  Add an “About” page to the application to describe your chosen customer’s company to web viewers and include navigation to and from the “About” page and the main screen.
+>
+> 
+>  - Files:
+>     - about.html / Lines: All
+>     - mainscreen.html / Lines:
+>     - demo.css / Lines 
+>     - README.md / Lines 
+>
+> 
+>  - Changes:  
+     Added the about page to the application 
