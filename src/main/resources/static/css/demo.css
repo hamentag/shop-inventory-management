@@ -1,0 +1,11 @@
+/*Products-Parts names*/
+.products-parts-names th{
+    width: 125px;
+}
+.products-parts-names td{
+    width: 130px;
+    padding-left: 10px;
+}
+.products-parts-names tr:first-child{
+    background-color: lightgray;
+}

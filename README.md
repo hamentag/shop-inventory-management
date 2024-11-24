@@ -24,3 +24,22 @@ For this project, you will use the Integrated Development Environment (IDE) link
 If you need additional support, please navigate to the course page and reach out to your course instructor.
 ## FUTURE USE
 Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
+## DESCRIPTION (Task B)
+### Task C:
+>  - Prompt:  
+> Customize the HTML user interface for your customer’s application. The user interface should include the shop name, the product names, and the names of the parts.
+> 
+> 
+>  - Files:
+>   - mainscreen.html / Lines: 14, 19, 21-42  
+>   - demo.css / Lines 1-11  
+>   - README.md / Lines 27-43
+> 
+> 
+>  - Changes:  
+Added the shop name, the product names, and the names of the parts to the interface  
+Added some styles  
+Parts: Flour, Butter, Eggs, Milk, Vanilla Extract  
+Products: Birthday Cakes, Cupcakes, Croissants, Cookies, Tarts
+> 
+> 
