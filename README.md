@@ -53,10 +53,13 @@ Products: Birthday Cakes, Cupcakes, Croissants, Cookies, Tarts
 > 
 >  - Files:
 >     - about.html / Lines: All
->     - mainscreen.html / Lines:
->     - demo.css / Lines 
->     - README.md / Lines 
+>     - mainscreen.html / Lines: 18-24
+>     - demo.css / Lines 16-71
+>     - README.md / Lines 49-63
+>     - InhousePartForm.html / Lines 7-21 (styling)
+>     - OutsourcedPartForm.html / Lines 6-21 (styling)
 >
 > 
 >  - Changes:  
-     Added the about page to the application 
+Added the about page to the application  
+The “About” page includes navigation to and from the “About” page and the main screen (Home button)
