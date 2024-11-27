@@ -63,3 +63,24 @@ Products: Birthday Cakes, Cupcakes, Croissants, Cookies, Tarts
 >  - Changes:  
 Added the about page to the application  
 The “About” page includes navigation to and from the “About” page and the main screen (Home button)
+> 
+>
+
+
+### Task E:
+>  - Prompt:  
+Add a sample inventory appropriate for your chosen store to the application. 
+You should have five parts and five products in your sample inventory and should not 
+overwrite existing data in the database.  
+Note: Make sure the sample inventory is added only when both the part and product lists 
+are empty. When adding the sample inventory appropriate for the store, the inventory is 
+stored in a set so duplicate items cannot be added to your products. When duplicate items 
+are added, make a “multi_pack” part.
+> 
+> - Files:
+>  - InhousePart.java / Lines: 20-23
+>  - OutsourcePart.java / Lines: 20-25
+>  - BootStrapData.java / Lines: 46-62, 82-93
+>  - README.md / Lines 70-84
+>
+>
