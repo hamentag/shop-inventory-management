@@ -6,6 +6,7 @@ import com.example.demo.repositories.PartRepository;
 import com.example.demo.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product findById(int theId) {
+    public Product findById(long theId) {
         Long theIdl=(long)theId;
         Optional<Product> result = productRepository.findById(theIdl);
 
@@ -56,7 +57,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(long theId) {
         Long theIdl=(long)theId;
         productRepository.deleteById(theIdl);
     }
@@ -65,5 +66,13 @@ public class ProductServiceImpl implements ProductService{
             return productRepository.search(keyword);
         }
         return (List<Product>) productRepository.findAll();
+    }
+
+    @Transactional
+    public void decrementInv(long productId, int decAmount) {
+        Product theProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Product with id " + productId + " does not exist"));
+        theProduct.setInv(theProduct.getInv() - decAmount);
     }
 }

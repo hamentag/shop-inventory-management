@@ -84,3 +84,29 @@ are added, make a “multi_pack” part.
 >  - README.md / Lines 70-84
 >
 >
+
+
+### Task F:
+>  - Prompt:  
+     Add a “Buy Now” button to your product list. Your “Buy Now” button must meet each of the following parameters:  
+     •  The “Buy Now” button must be next to the buttons that update and delete products.  
+     •  The button should decrement the inventory of that product by one. It should not affect the inventory of any of the associated parts.  
+     •  Display a message that indicates the success or failure of a purchase.
+> 
+> 
+> - Files:  
+  •  mainscreen.html / Line: 109  
+  •  AddProductController.java / Lines: 115-125  
+  •  ObuyProductPage.html / Lines: All  
+  •  ProductService.java / Line: 20  
+  •  ProductServiceImpl.java / Lines: 71-77  
+  •  README.md / Lines 89-109  
+>
+>
+>  - Changes:  
+Added a method decrementInv(long productId, int decAmount); to the product service implementation. 
+The method accepts two arguments long productId for the product Id and int decAmount for 
+the amount by which the inventory should be decremented. @Transactional is used to update 
+the product inventory by using setter setInv() and without implement any jpql query.
+> 
+>

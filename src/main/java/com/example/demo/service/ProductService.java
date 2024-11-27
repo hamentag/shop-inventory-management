@@ -13,9 +13,10 @@ import java.util.List;
  */
 public interface ProductService {
     public List<Product> findAll();
-    public Product findById(int theId);
+    public Product findById(long theId);
     public void save (Product theProduct);
-    public void deleteById(int theId);
+    public void deleteById(long theId);
     public List<Product> listAll(String keyword);
+    public void decrementInv(long productId, int decAmount);
 
 }

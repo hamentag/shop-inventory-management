@@ -112,6 +112,18 @@ public class AddProductController {
         return "productForm";
     }
 
+    @GetMapping("/buyProduct")
+    public String buyProduct(@RequestParam("productID") long theId, Model theModel) {
+        ProductService repo = context.getBean(ProductServiceImpl.class);
+
+        repo.decrementInv(theId, 1); // Decrement product inventory by one
+
+        Product theProduct = repo.findById(theId);
+        theModel.addAttribute("product", theProduct);
+
+        return "buyProductPage";
+    }
+
     @GetMapping("/deleteproduct")
     public String deleteProduct(@RequestParam("productID") int theId, Model theModel) {
         ProductService productService = context.getBean(ProductServiceImpl.class);
