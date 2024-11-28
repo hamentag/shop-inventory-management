@@ -59,6 +59,17 @@ p {
 
 }
 
+.link-to-main-screen a{
+    color: Blue;
+    text-decoration: none;
+    padding: 3px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: rgba(220,220,220,0.35);;
+}
+
+
+
 @media (max-width: 820px) {
     .about-content{
         width: 100%;

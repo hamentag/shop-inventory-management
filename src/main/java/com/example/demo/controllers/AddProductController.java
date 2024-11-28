@@ -116,12 +116,18 @@ public class AddProductController {
     public String buyProduct(@RequestParam("productID") long theId, Model theModel) {
         ProductService repo = context.getBean(ProductServiceImpl.class);
 
-        repo.decrementInv(theId, 1); // Decrement product inventory by one
+        try{
+            repo.decrementInv(theId, 1); // Decrement product inventory by one
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            theModel.addAttribute("message", e.getMessage());
+            return "purchaseFailure";
+        }
 
         Product theProduct = repo.findById(theId);
         theModel.addAttribute("product", theProduct);
 
-        return "buyProductPage";
+        return "ConfirmationBuyProduct";
     }
 
     @GetMapping("/deleteproduct")

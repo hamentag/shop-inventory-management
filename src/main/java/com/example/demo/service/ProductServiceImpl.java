@@ -69,10 +69,16 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Transactional
-    public void decrementInv(long productId, int decAmount) {
+    public void decrementInv(long productId, int decQty) {
         Product theProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Product with id " + productId + " does not exist"));
-        theProduct.setInv(theProduct.getInv() - decAmount);
+        if (decQty < 0) {
+            throw new IllegalArgumentException("You cannot reduce inventory by a negative quantity. The quantity should be positive.");
+        }
+        else if(theProduct.getInv() < decQty) {
+            throw new IllegalArgumentException("Insufficient inventory: The requested quantity exceeds the available stock.");
+        }
+        theProduct.setInv(theProduct.getInv() - decQty);
     }
 }

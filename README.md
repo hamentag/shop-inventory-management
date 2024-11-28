@@ -96,11 +96,12 @@ are added, make a “multi_pack” part.
 > 
 > - Files:  
   •  mainscreen.html / Line: 109  
-  •  AddProductController.java / Lines: 115-125  
-  •  ObuyProductPage.html / Lines: All  
+  •  AddProductController.java / Lines: 115-131  
+  •  ConfirmationBuyProduct.html / Lines: All  
   •  ProductService.java / Line: 20  
-  •  ProductServiceImpl.java / Lines: 71-77  
-  •  README.md / Lines 89-109  
+  •  ProductServiceImpl.java / Lines: 71-84  
+  •  README.md / Lines 89-111  
+  •  purchaseFailure.html / Lines: All
 >
 >
 >  - Changes:  
