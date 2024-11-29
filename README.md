@@ -52,12 +52,12 @@ Products: Birthday Cakes, Cupcakes, Croissants, Cookies, Tarts
 >
 > 
 >  - Files:
->     - about.html / Lines: All
->     - mainscreen.html / Lines: 18-24
->     - demo.css / Lines 16-71
->     - README.md / Lines 49-63
->     - InhousePartForm.html / Lines 7-21 (styling)
->     - OutsourcedPartForm.html / Lines 6-21 (styling)
+>     •  about.html / Lines: All  
+>     •  mainscreen.html / Lines: 18-24  
+>     •  demo.css / Lines 16-71  
+>     •  README.md / Lines 49-63  
+>     •  InhousePartForm.html / Lines 7-21 (styling)  
+>     •  OutsourcedPartForm.html / Lines 6-21 (styling)  
 >
 > 
 >  - Changes:  
@@ -78,10 +78,10 @@ stored in a set so duplicate items cannot be added to your products. When duplic
 are added, make a “multi_pack” part.
 > 
 > - Files:
->  - InhousePart.java / Lines: 20-23
->  - OutsourcePart.java / Lines: 20-25
->  - BootStrapData.java / Lines: 46-62, 82-93
->  - README.md / Lines 70-84
+>  •  InhousePart.java / Lines: 20-23  
+>  •  OutsourcePart.java / Lines: 20-25  
+>  •  BootStrapData.java / Lines: 46-62, 82-93  
+>  •  README.md / Lines 70-84  
 >
 >
 
@@ -111,3 +111,43 @@ the amount by which the inventory should be decremented. @Transactional is used 
 the product inventory by using setter setInv() and without implement any jpql query.
 > 
 >
+
+
+
+### Task G:
+>  - Prompt: 
+Modify the parts to track maximum and minimum inventory by doing the following:  
+•  Add additional fields to the part entity for maximum and minimum inventory.  
+•  Modify the sample inventory to include the maximum and minimum fields.  
+•  Add to the InhousePartForm and OutsourcedPartForm forms additional text inputs 
+for the inventory so the user can set the maximum and minimum values.  
+•  Rename the file the persistent storage is saved to.  
+•  Modify the code to enforce that the inventory is between or at the minimum and maximum value.  
+
+>
+>
+> - Files:  
+    •  BootStrapData.java / Line: 46-117  
+    •  AddInhousePartController.java / Lines: 45-65  
+    •  AddOutsourcedPartController.java / Lines: 45-65  
+    •  InhousePart.java / Lines: 20-21  
+    •  OutsourcedPart.java / Lines: 20-25  
+    •  Part.java / Lines: 31-34, 44-58, 105-110  
+    •  InhousePartForm.html / Lines: 37-41  
+    •  OutsourcedPartForm.html / Lines: 37-41  
+    •  application.properties / Line: 6  
+    •  README.md / Lines:  Lines: 117-149  
+> 
+>
+>  - Changes:  
+     •  minInv and maxInv are added to the Part entity  
+     •  Sample inventory is modified to include minInv and maxInv and validation for (minInv < maxInv) and (minInv < inv < maxInv) constraints  
+     •  Input fields are added so the user can set the minInv and maxInv  
+     •  Features are added to check that (minInv < maxInv) and (minInv < inv < maxInv) constraints are assured  
+     •  spring.datasource.url in application.properties is renamed  
+> 
+> 
+
+
+
+

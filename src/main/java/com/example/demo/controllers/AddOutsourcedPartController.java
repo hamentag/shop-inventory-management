@@ -43,14 +43,26 @@ public class AddOutsourcedPartController {
         if(bindingResult.hasErrors()){
             return "OutsourcedPartForm";
         }
-        else{
-        OutsourcedPartService repo=context.getBean(OutsourcedPartServiceImpl.class);
-        OutsourcedPart op=repo.findById((int)part.getId());
-        if(op!=null)part.setProducts(op.getProducts());
-            repo.save(part);
-        return "confirmationaddpart";}
+        else {
+            try{
+                if(!part.validMinAndMaxInv()) {
+                    throw new IllegalArgumentException("Max inventory value must be greater than min inventory value");
+                }
+                else if(!part.validInv()) {
+                    throw new IllegalArgumentException("Inventory must be between " + part.getMinInv() + " and " + part.getMaxInv());
+                }
+                else{
+                    OutsourcedPartService repo=context.getBean(OutsourcedPartServiceImpl.class);
+                    OutsourcedPart op=repo.findById((int)part.getId());
+                    if(op!=null)part.setProducts(op.getProducts());
+                    repo.save(part);
+                    return "confirmationaddpart";
+                }
+
+            } catch (IllegalStateException e){
+                System.out.print(e.getMessage());
+                return "OutsourcedPartForm";
+            }
+        }
     }
-
-
-
 }

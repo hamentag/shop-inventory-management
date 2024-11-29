@@ -15,6 +15,7 @@ import com.example.demo.service.ProductServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,61 +43,92 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         if(productRepository.count() == 0 && partRepository.count() == 0){
+            List<InhousePart> inhouseParts = Arrays.asList(
+                    // Valid inputs
+                    new InhousePart("Butter", 10.4,113, 10, 300,10),
+                    new InhousePart("Vanilla Extract", 13.4, 10, 10, 300, 11),
+                    // Test for invalid max and min inventory
+                    new InhousePart("baking powder", 10.2, 9, 10, 8, 11)
+                    );
+            List<OutsourcedPart> outsourcedParts = Arrays.asList(
+                    // Valid inputs
+                    new OutsourcedPart("Flour", 8.6, 46, 10, 300, "Nassma"),
+                    new OutsourcedPart("Milk", 12.4, 33, 10, 300, "Jaouda"),
+                    new OutsourcedPart("Eggs", 1.2, 275, 10, 300,"Super Eggs"),
+                    // Test for invalid inventory as inv < min or inv > max
+                    new OutsourcedPart("sugar", 15.1, 9, 10, 300, "Socap"),
+                    new OutsourcedPart("sugar", 15.1, 301, 10, 300, "Socap")
+            );
+            List<Product> products = Arrays.asList(
+                    new Product("Birthday Cake", 65.5, 45),
+                    new Product("Cupcakes", 12.4, 125),
+                    new Product("Croissants", 24.3, 150),
+                    new Product("Cookies", 10.49, 219),
+                    new Product("Tarts", 15.4, 49)
+            );
 
             System.out.println("Adding new parts and products in progress...");
 
-            outsourcedPartRepository.save(new OutsourcedPart("Flour", 8.6, 46, "Nassma"));
-            outsourcedPartRepository.save(new OutsourcedPart("Milk", 12.4, 33, "Jaouda"));
-            outsourcedPartRepository.save(new OutsourcedPart("Eggs", 1.2, 375, "Super Eggs"));
+            // Add inhouse parts
+            for(InhousePart inhousePart : inhouseParts){
+                try{
+                    if(!inhousePart.validMinAndMaxInv()) {
+                        throw new IllegalArgumentException(
+                                "Invalid Min and Max inventory for " + inhousePart.getName() + ": "
+                                        + "Max inventory must be greater than Min inventory");
+                    }
+                    else if(!inhousePart.validInv()) {
+                        throw new IllegalArgumentException(
+                                "Invalid inventory for " + inhousePart.getName() + ": " + "Inventory must be between "
+                                        + inhousePart.getMinInv() + " and " + inhousePart.getMaxInv());
+                    }
+                    else{
+                        inhousePartRepository.save(inhousePart);
+                    }
 
-            inhousePartRepository.save(new InhousePart("Butter", 10.4, 113, 10));
-            inhousePartRepository.save(new InhousePart("Vanilla Extract", 13.4, 125, 11));
+                } catch (IllegalArgumentException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+            // Add outsourse parts
+            for(OutsourcedPart outsourcedPart : outsourcedParts) {
+                    try{
+                        if(!outsourcedPart.validMinAndMaxInv()) {
+                            throw new IllegalArgumentException(
+                                    "Invalid Min and Max inventory for " + outsourcedPart.getName() + ": "
+                                            + "Max inventory must be greater than Min inventory");
+                        }
+                        else if(!outsourcedPart.validInv()) {
+                            throw new IllegalArgumentException(
+                                    "Invalid inventory for " + outsourcedPart.getName() + ": " + "Inventory must be between "
+                                            + outsourcedPart.getMinInv() + " and " + outsourcedPart.getMaxInv());
+                        }
+                        else{
+                            outsourcedPartRepository.save(outsourcedPart);
+                        }
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
+                }
 
-
-            productRepository.save(new Product("Birthday Cake", 65.5, 45));
-            productRepository.save(new Product("Cupcakes", 12.4, 125));
-            productRepository.save(new Product("Croissants", 24.3, 150));
-            productRepository.save(new Product("Cookies", 10.49, 219));
-            productRepository.save(new Product("Tarts", 15.4, 49));
+            // Add all products
+            productRepository.saveAll(products);
         }
 
-       /*
-        OutsourcedPart o= new OutsourcedPart();
-        o.setCompanyName("Western Governors University");
-        o.setName("out test");
-        o.setInv(5);
-        o.setPrice(20.0);
-        o.setId(100L);
-        outsourcedPartRepository.save(o);
-        OutsourcedPart thePart=null;
-        List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
-        for(OutsourcedPart part:outsourcedParts){
-            if(part.getName().equals("out test"))thePart=part;
-        }
-
-        System.out.println(thePart.getCompanyName());
-        */
-
+        // List inhouse parts
         List<InhousePart> inhouseParts = (List<InhousePart>) inhousePartRepository.findAll();
         System.out.println("Inhouse parts:");
         for(InhousePart part:inhouseParts){
             System.out.println("\t" + part.getName()+" with partId = "+part.getPartId());
         }
 
+        // List outsoursed parts
         List<OutsourcedPart> outsourcedParts=(List<OutsourcedPart>) outsourcedPartRepository.findAll();
         System.out.println("Outsource parts:");
         for(OutsourcedPart part:outsourcedParts){
             System.out.println("\t" + part.getName()+" purchased from "+part.getCompanyName());
         }
-
-        /*
-        Product bicycle= new Product("bicycle",100.0,15);
-        Product unicycle= new Product("unicycle",100.0,15);
-        productRepository.save(bicycle);
-        productRepository.save(unicycle);
-        */
 
         System.out.println("Started in Bootstrap");
         System.out.println("Number of Products: "+productRepository.count());
