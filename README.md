@@ -174,3 +174,15 @@ for the inventory so the user can set the maximum and minimum values.
     • Error messages are displayed when max inventory is less than min inventory  
     • Page styling is added to the application
 
+
+### Task I:
+>  - Prompt:  
+     Add at least two unit tests for the maximum and minimum fields to the PartTest class 
+in the test package.
+>
+> - Files:  
+    • PartTest.java / Lines: 160-235
+    • README.md / Lines: 178-185
+
+
+

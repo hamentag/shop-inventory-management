@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Project: demoDarbyFrameworks2-master
@@ -31,7 +31,7 @@ class PartTest {
     void getId() {
         Long idValue=4L;
         partIn.setId(idValue);
-        assertEquals(partIn.getId(), idValue);
+        assertEquals(partIn.getId() , idValue);
         partOut.setId(idValue);
         assertEquals(partOut.getId(), idValue);
     }
@@ -155,5 +155,82 @@ class PartTest {
         partIn.setId(1l);
         partOut.setId(1l);
         assertEquals(partIn.hashCode(),partOut.hashCode());
+    }
+
+    @Test
+    void getMinInv() {
+        int minInv = 3;
+        partIn.setMinInv(minInv);
+        assertEquals(minInv,partIn.getMinInv());
+        partOut.setMinInv(minInv);
+        assertEquals(minInv,partOut.getMinInv());
+    }
+
+    @Test
+    void setMinInv() {
+        int minInv = 3;
+        partIn.setMinInv(minInv);
+        assertEquals(minInv,partIn.getMinInv());
+        partOut.setMinInv(minInv);
+        assertEquals(minInv,partOut.getMinInv());
+    }
+
+    @Test
+    void getMaxInv() {
+        int maxInv = 8;
+        partIn.setMaxInv(maxInv);
+        assertEquals(maxInv,partIn.getMaxInv());
+        partOut.setMaxInv(maxInv);
+        assertEquals(maxInv,partOut.getMaxInv());
+    }
+
+    @Test
+    void setMaxInv() {
+        int maxInv = 8;
+        partIn.setMaxInv(maxInv);
+        assertEquals(maxInv,partIn.getMaxInv());
+        partOut.setMaxInv(maxInv);
+        assertEquals(maxInv,partOut.getMaxInv());
+    }
+
+    @Test
+    void validMinAndMaxInv() {
+        int minInv = 3, maxInv = 8;
+        partIn.setMinInv(minInv);
+        partIn.setMaxInv(maxInv);
+        assertTrue(partIn.validMinAndMaxInv());
+
+        partOut.setMinInv(minInv);
+        partOut.setMaxInv(maxInv);
+        assertTrue(partOut.validMinAndMaxInv());
+
+        minInv = 8;
+        maxInv = 3;
+        partIn.setMinInv(minInv);
+        partIn.setMaxInv(maxInv);
+        assertFalse(partIn.validMinAndMaxInv());
+
+        partOut.setMinInv(minInv);
+        partOut.setMaxInv(maxInv);
+        assertFalse(partOut.validMinAndMaxInv());
+    }
+
+    @Test
+    void validInv() {
+        int inv = 8, minInv = 3, maxInv = 8;
+        partIn.setInv(inv);
+        partIn.setMinInv(minInv);
+        partIn.setMaxInv(maxInv);
+        assertTrue(partIn.validInv());
+        inv = 2;
+        partIn.setInv(inv);
+        partIn.setMinInv(minInv);
+        partIn.setMaxInv(maxInv);
+        assertFalse(partIn.validInv());
+        inv = 9;
+        partOut.setInv(inv);
+        partOut.setMinInv(minInv);
+        partOut.setMaxInv(maxInv);
+        assertFalse(partOut.validInv());
     }
 }
