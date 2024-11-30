@@ -65,4 +65,10 @@ public class PartServiceImpl implements PartService{
         Long theIdl=(long)theId;
         partRepository.deleteById(theIdl);
     }
+
+    @Override
+    // <S extends T> Iterable<S> saveAll(Iterable<S> entities);
+    public void saveAll(List<Part> parts) {
+            partRepository.saveAll(parts);
+    }
 }

@@ -46,10 +46,12 @@ public class AddOutsourcedPartController {
         else {
             try{
                 if(!part.validMinAndMaxInv()) {
-                    throw new IllegalArgumentException("Max inventory value must be greater than min inventory value");
+                    bindingResult.rejectValue("maxInv", "minAndMaxInventory.invalid", "Max inventory value must be greater than Min inventory value");
+                    return "OutsourcedPartForm";
                 }
                 else if(!part.validInv()) {
-                    throw new IllegalArgumentException("Inventory must be between " + part.getMinInv() + " and " + part.getMaxInv());
+                    bindingResult.rejectValue("inv", "inventory.invalid", "Inventory must be between " + part.getMinInv() + " and " + part.getMaxInv());
+                    return "OutsourcedPartForm";
                 }
                 else{
                     OutsourcedPartService repo=context.getBean(OutsourcedPartServiceImpl.class);

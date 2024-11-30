@@ -17,5 +17,7 @@ public interface PartService {
     public void save (Part thePart);
     public void deleteById(int theId);
 
+    public void saveAll(List<Part> parts);
+
     public List<Part> listAll(String keyword);
 }

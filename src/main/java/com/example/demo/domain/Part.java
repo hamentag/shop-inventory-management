@@ -19,7 +19,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="part_type",discriminatorType = DiscriminatorType.INTEGER)
 @Table(name="Parts")
-public abstract class Part implements Serializable {
+public abstract class Part implements Cloneable, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
@@ -133,5 +133,15 @@ public abstract class Part implements Serializable {
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
+    }
+
+    @Override
+    public Part clone() {
+        try {
+            return (Part) super.clone(); // Calls Object's clone method
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

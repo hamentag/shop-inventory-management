@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import com.example.demo.domain.InhousePart;
+import com.example.demo.domain.OutsourcedPart;
 import com.example.demo.domain.Part;
 import com.example.demo.domain.Product;
 import com.example.demo.service.PartService;
@@ -77,11 +79,36 @@ public class AddProductController {
             if(product.getId()!=0) {
                 Product product2 = repo.findById((int) product.getId());
                 PartService partService1 = context.getBean(PartServiceImpl.class);
+
                 if(product.getInv()- product2.getInv()>0) {
+                    List<Part> tempPartList = new ArrayList<>();
                     for (Part p : product2.getParts()) {
+                        Part tp = p.clone();
+                        tempPartList.add(tp);
                         int inv = p.getInv();
                         p.setInv(inv - (product.getInv() - product2.getInv()));
-                        partService1.save(p);
+                        if(!p.validInv()) {
+                            bindingResult.reject( "inventory.invalid",
+                                    "Low inventory error: Insufficient quantity of part " +
+                                            p.getName() + " to produce " + (product.getInv() - product2.getInv()) +
+                                            " unit" + (product.getInv() - product2.getInv() != 1? "s " : " ") +
+                                            "of " + product.getName() + " product"
+                            );
+                        }
+                    }
+                    if(bindingResult.hasErrors()) {
+                        List<Part>availParts=new ArrayList<>();
+                        for(Part p: partService.findAll()){
+                            if(!product2.getParts().contains(p))availParts.add(p);
+                        }
+
+                        theModel.addAttribute("availparts",availParts);
+                        theModel.addAttribute("assparts", tempPartList);
+
+                        return "productForm";
+                    }
+                    else{
+                        partService.saveAll(new ArrayList<>(product2.getParts()));
                     }
                 }
             }

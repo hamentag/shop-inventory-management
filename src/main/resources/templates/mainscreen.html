@@ -49,9 +49,9 @@
     <form th:action="@{/mainscreen}">
         Filter: <input type="text" name="partkeyword" id="partkeyword" size="50" th:value="${partkeyword}" required />
         &nbsp;
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" class="search-btn"/>
         &nbsp;
-        <input type="button" value="Clear" id="btnClearPart" onclick="clearSearch()" />
+        <input type="button" value="Clear" class="clear-btn" id="btnClearPart" onclick="clearSearch()" />
     </form>
     <br><br>
     <a th:href="@{/showFormAddInPart}" class="btn btn-primary btn-sm mb-3">Add Inhouse Part</a>
@@ -62,6 +62,8 @@
             <th>Name</th>
             <th>Price</th>
             <th>Inventory</th>
+            <th>Min Inventory</th>
+            <th>Max Inventory</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -70,6 +72,8 @@
             <td th:text="${tempPart.name}">1</td>
             <td th:text="${tempPart.price}">1</td>
             <td th:text="${tempPart.inv}">1</td>
+            <td th:text="${tempPart.minInv}">1</td>
+            <td th:text="${tempPart.maxInv}">1</td>
             <td><a th:href="@{/showPartFormForUpdate(partID=${tempPart.id})}" class="btn btn-primary btn-sm mb-3">Update</a>
                 <a th:href="@{/deletepart(partID=${tempPart.id})}" class="btn btn-primary btn-sm mb-3"
                    onclick="if(!(confirm('Are you sure you want to delete this part?')))return false">Delete</a>
@@ -81,9 +85,9 @@
     <form th:action="@{/mainscreen}">
         Filter: <input type="text" name="productkeyword" id="productkeyword" size="50" th:value="${productkeyword}" required />
         &nbsp;
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" class="search-btn" />
         &nbsp;
-        <input type="button" value="Clear" id="btnClearProduct" onclick="clearSearch()" />
+        <input type="button" value="Clear" class="clear-btn" id="btnClearProduct" onclick="clearSearch()" />
     </form>
     <script type="text/javascript">
         function clearSearch() {
@@ -114,6 +118,9 @@
         </tr>
         </tbody>
     </table>
+    <div class="link-to-main-screen">
+        <a href="http://localhost:8080/">Back to Top</a>
+    </div>
 </div>
 </body>
 </html>
